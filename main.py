@@ -3,11 +3,15 @@ import scipy.stats
 import scipy.stats as stats
 
 
-class Lab3Extra:
+class Lab3:
     sample = list
 
     def __init__(self, count):
         self.sample = numpy.random.random_sample(count)
+
+    def info(self):
+        ## self.sample.info()
+        print(f"\n{self.sample}")
 
     def інтервальна_оцінка_мат_сподівання(self, рівень_довіри):
         min = (numpy.mean(self.sample) - numpy.sqrt(numpy.var(self.sample)) * stats.t.ppf(рівень_довіри, (len(self.sample) - 1)) / numpy.sqrt(len(self.sample) - 1))
@@ -23,7 +27,8 @@ class Lab3Extra:
 
 
 if __name__ == '__main__':
-    app = Lab3Extra(80)
+    app = Lab3(80)
+    app.info()
     app.інтервальна_оцінка_мат_сподівання(рівень_довіри=0.95)
     app.інтервальна_оцінка_середньоквадратичного_відхилення(рівень_довіри=0.95)
 
@@ -39,13 +44,13 @@ if __name__ == '__main__':
 
     print("\nЗалежність математичного сподівання від об'єму вибірки")
     for n in [80, 40, 20, 10]:
-        appI = Lab3Extra(n)
+        appI = Lab3(n)
         appI.інтервальна_оцінка_мат_сподівання(рівень_довіри=0.95)
     print("При зменшені об'єма вибірки інтервал математичного сподівання розширюється")
 
     print("\nЗалежність середньоквадратичного відхилення від об'єму вибірки")
     for n in [80, 40, 20, 10]:
-        appI = Lab3Extra(n)
+        appI = Lab3(n)
         appI.інтервальна_оцінка_середньоквадратичного_відхилення(рівень_довіри=0.95)
     print("При зменшені об'єма вибірки інтервал середньоквадратичного відхилення розширюється")
 
